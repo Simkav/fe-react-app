@@ -11,8 +11,12 @@ class Aloha extends Component {
     const { isGreeting } = this.state;
     this.setState({ isGreeting: !isGreeting });
   };
+  selfDestruction = () => {
+    const { deleteUser, id } = this.props;
+    deleteUser(id);
+  };
   render() {
-    const { name, photo } = this.props;
+    const { name, photo, removeChild, id } = this.props;
     const { isGreeting } = this.state;
     if (!isGreeting) {
       return <h1>Пока {name}</h1>;
@@ -24,6 +28,7 @@ class Aloha extends Component {
         </h1>
         <img src={photo}></img>
         <button onClick={this.switchState}>Switch</button>
+        <button onClick={this.selfDestruction}>Delete</button>
       </>
     );
   }

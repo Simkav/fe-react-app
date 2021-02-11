@@ -15,16 +15,15 @@ class SortedAlohaList extends Component {
     setUsers(
       usersCopy.sort((a, b) => (isDirectSort ? b.id - a.id : a.id - b.id))
     );
-
     this.setState({
       isDirectSort: !isDirectSort,
     });
   };
   render() {
-    const { users } = this.props;
+    const { users, setUsers, deleteUser } = this.props;
     return (
       <>
-        <AlohaList users={users} />
+        <AlohaList users={users} setUsers={setUsers} deleteUser={deleteUser} />
         <button onClick={this.sortUsers}>SORT</button>
       </>
     );

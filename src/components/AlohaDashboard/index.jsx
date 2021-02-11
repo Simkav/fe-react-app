@@ -48,12 +48,22 @@ class AlohaDashboard extends Component {
   setUsers = (users) => {
     this.setState({ users });
   };
+  deleteUser = (userId) => {
+    const { users } = this.state;
+    this.setState({
+      users: users.filter((user) => user.id !== userId),
+    });
+  };
 
   render() {
     const { users } = this.state;
     return (
       <>
-        <SortedAlohaList users={users} setUsers={this.setUsers} />
+        <SortedAlohaList
+          users={users}
+          setUsers={this.setUsers}
+          deleteUser={this.deleteUser}
+        />
       </>
     );
   }
