@@ -1,14 +1,13 @@
-import './App.css';
-import AlohaDashboard from './components/AlohaDashboard';
 import React, { Component } from 'react';
+import './App.css';
+import StopWatch from './components/StopWatch';
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <AlohaDashboard />
-      </>
-    );
-  }
+function App(props) {
+  return (
+    <>
+      <StopWatch />
+    </>
+  );
 }
+
 export default App;
