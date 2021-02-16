@@ -20,12 +20,15 @@ class StopWatch extends Component {
   };
 
   start = () => {
+    console.log(this.timeoutId);
     if (!this.timeoutId) {
       this.timeOutTick();
     }
   };
 
   componentDidUpdate() {
+    console.log(this.timeoutId);
+
     if (this.timeoutId) {
       this.timeOutTick();
     }

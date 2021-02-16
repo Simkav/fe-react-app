@@ -1,0 +1,9 @@
+.field {
+  font-size: 2rem;
+}
+.hidden {
+  display: none;
+}
+.container {
+  margin-top: 20px;
+}

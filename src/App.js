@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import StopWatch from './components/StopWatch';
+import Counter from './components/Counter';
 
 function App(props) {
   return (
     <>
-      <StopWatch />
+      <Counter step={1} />
     </>
   );
 }
