@@ -10,9 +10,12 @@ class Counter extends Component {
       isIncriment: true,
       isValid: true,
       step: 1,
-      intervalTime: 1000,
+      autoClickInterval: 1000,
       showOptions: true,
+      autoClickDuration: 0,
     };
+    this.autoClickDurationId = null;
+    this.autoClickMaxDuration = 30;
     this.intervalId = null;
   }
 
@@ -29,7 +32,7 @@ class Counter extends Component {
   changeIntervalTime = (e) => {
     const value = this.checkValidNumber(e.target.value);
     this.setState({
-      intervalTime: value,
+      autoClickInterval: value,
     });
   };
   checkValidNumber = (number) => {
@@ -49,13 +52,21 @@ class Counter extends Component {
   stopAutoClick = () => {
     clearInterval(this.intervalId);
     this.intervalId = null;
+    clearInterval(this.autoClickDurationId);
+    this.autoClickDurationId = null;
+    this.setState({
+      autoClickDuration: 0,
+    });
   };
   startAutoClick = () => {
-    this.stopAutoClick();
-    const { intervalTime } = this.state;
+    const { autoClickInterval } = this.state;
+    let { autoClickDuration } = this.state;
     let { intervalId } = this;
     if (!intervalId) {
-      this.intervalId = setInterval(this.incriment, intervalTime);
+      this.intervalId = setInterval(this.incriment, autoClickInterval);
+      this.autoClickDurationId = setInterval(() => {
+        this.setState({ autoClickDuration: ++autoClickDuration });
+      }, 1000);
     }
   };
   incriment = () => {
@@ -70,23 +81,33 @@ class Counter extends Component {
     this.checkValidNumber(this.props.step);
     this.startAutoClick();
   }
+  componentDidUpdate() {
+    if (this.state.autoClickDuration >= this.autoClickMaxDuration) {
+      this.stopAutoClick();
+    }
+  }
 
   render() {
-    const { count, isValid, step, intervalTime, showOptions } = this.state;
+    const {
+      count,
+      isValid,
+      step,
+      autoClickInterval,
+      showOptions,
+      autoClickDuration,
+    } = this.state;
     if (!isValid) {
       return <>Something go wrong, reload app</>;
     }
     return (
       <section>
-        <div className={Style.fieldContainer}>
-          <div className={cx(Style.field, Style.count)}>Counter: {count}</div>
-        </div>
-        <div className={Style.container}>
+        <div className={cx(Style.field, Style.count)}>Counter: {count}</div>
+        <div className={Style.btnContainer}>
           <button
             className={cx(Style.incrimentBtn, Style.btn)}
             onClick={this.incriment}
           >
-            Quick math
+            Incriment
           </button>
           <button
             className={cx(Style.switchModeBtn, Style.btn)}
@@ -94,17 +115,18 @@ class Counter extends Component {
           >
             Switch mode
           </button>
-        </div>
-        <div className={Style.fieldContainer}>
-          <button onClick={this.startAutoClick}>AutoClick</button>
+          <div className={Style.autoClickContainer}>
+            <button onClick={this.startAutoClick}>AutoClick </button>
+            <div className={Style.autoClickDuration}>{autoClickDuration}</div>
+          </div>
           <button onClick={this.stopAutoClick}>Stop</button>
         </div>
         <button onClick={this.handleChaneOptions}>Options</button>
         <div className={cx({ [Style.hidden]: showOptions })}>
-          Interval time:{' '}
+          Interval time:
           <input
             onChange={this.changeIntervalTime}
-            value={intervalTime}
+            value={autoClickInterval}
           ></input>{' '}
           <div className={cx(Style.field, Style.step)}>
             Step: <input onChange={this.handleChangeStep} value={step}></input>

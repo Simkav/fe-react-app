@@ -7,3 +7,14 @@
 .container {
   margin-top: 20px;
 }
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+}
+.autoClickContainer > * {
+  display: inline-block;
+}
+.autoClickDuration {
+  margin-left: 20px;
+}
