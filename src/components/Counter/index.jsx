@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Style from './Counter.module.css';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import CounterOptions from './CounterOptions';
 import CounterMainBtns from './CounterMainBtns';
-
 class Counter extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +40,6 @@ class Counter extends Component {
   checkValidNumber = (number) => {
     const num = Number(number);
     if (isNaN(num)) {
-      console.log(num);
       this.setState({ isValid: false });
     } else {
       return num;
@@ -127,5 +126,11 @@ class Counter extends Component {
     );
   }
 }
+Counter.propTypes = {
+  step: PropTypes.number,
+};
+Counter.defaultProps = {
+  step: 1,
+};
 
 export default Counter;

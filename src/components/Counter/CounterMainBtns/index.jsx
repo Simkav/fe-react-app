@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 const CounterMainBtns = (props) => {
   const {
@@ -26,6 +27,15 @@ const CounterMainBtns = (props) => {
       <button onClick={stopAutoClick}>Stop</button>
     </div>
   );
+};
+CounterMainBtns.propTypes = {
+  Style: PropTypes.object,
+  autoClickDuration: PropTypes.number,
+  isIncriment: PropTypes.bool,
+  siwtchMode: PropTypes.func,
+  startAutoClick: PropTypes.func,
+  incriment: PropTypes.func,
+  stopAutoClick: PropTypes.func,
 };
 
 export default CounterMainBtns;

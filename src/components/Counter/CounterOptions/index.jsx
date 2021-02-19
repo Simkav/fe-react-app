@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 function CounterOptions(props) {
   const {
@@ -26,5 +27,14 @@ function CounterOptions(props) {
     </>
   );
 }
+CounterOptions.propTypes = {
+  Style: PropTypes.object,
+  showOptions: PropTypes.bool.isRequired,
+  autoClickInterval: PropTypes.number,
+  step: PropTypes.number.isRequired,
+  changeIntervalTime: PropTypes.func,
+  handleChangeStep: PropTypes.func,
+  changeOptions: PropTypes.func,
+};
 
 export default CounterOptions;
