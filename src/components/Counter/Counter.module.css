@@ -15,6 +15,3 @@
 .autoClickContainer > * {
   display: inline-block;
 }
-.autoClickDuration {
-  margin-left: 20px;
-}

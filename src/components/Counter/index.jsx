@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Style from './Counter.module.css';
 import cx from 'classnames';
+import CounterOptions from './CounterOptions';
+import CounterMainBtns from './CounterMainBtns';
 
 class Counter extends Component {
   constructor(props) {
@@ -44,7 +46,7 @@ class Counter extends Component {
       return num;
     }
   };
-  handleChaneOptions = () => {
+  handleChangeOptions = () => {
     this.setState({
       showOptions: !this.state.showOptions,
     });
@@ -77,8 +79,8 @@ class Counter extends Component {
   };
   componentDidMount() {
     const { step } = this.props;
+    this.checkValidNumber(step);
     this.setState({ step: step });
-    this.checkValidNumber(this.props.step);
     this.startAutoClick();
   }
   componentDidUpdate() {
@@ -95,6 +97,7 @@ class Counter extends Component {
       autoClickInterval,
       showOptions,
       autoClickDuration,
+      isIncriment,
     } = this.state;
     if (!isValid) {
       return <>Something go wrong, reload app</>;
@@ -102,36 +105,24 @@ class Counter extends Component {
     return (
       <section>
         <div className={cx(Style.field, Style.count)}>Counter: {count}</div>
-        <div className={Style.btnContainer}>
-          <button
-            className={cx(Style.incrimentBtn, Style.btn)}
-            onClick={this.incriment}
-          >
-            Incriment
-          </button>
-          <button
-            className={cx(Style.switchModeBtn, Style.btn)}
-            onClick={this.siwtchMode}
-          >
-            Switch mode
-          </button>
-          <div className={Style.autoClickContainer}>
-            <button onClick={this.startAutoClick}>AutoClick </button>
-            <div className={Style.autoClickDuration}>{autoClickDuration}</div>
-          </div>
-          <button onClick={this.stopAutoClick}>Stop</button>
-        </div>
-        <button onClick={this.handleChaneOptions}>Options</button>
-        <div className={cx({ [Style.hidden]: showOptions })}>
-          Interval time:
-          <input
-            onChange={this.changeIntervalTime}
-            value={autoClickInterval}
-          ></input>{' '}
-          <div className={cx(Style.field, Style.step)}>
-            Step: <input onChange={this.handleChangeStep} value={step}></input>
-          </div>
-        </div>
+        <CounterMainBtns
+          autoClickDuration={autoClickDuration}
+          incriment={this.incriment}
+          Style={Style}
+          switchMode={this.siwtchMode}
+          startAutoClick={this.startAutoClick}
+          stopAutoClick={this.stopAutoClick}
+          isIncriment={isIncriment}
+        />
+        <CounterOptions
+          Style={Style}
+          changeOptions={this.handleChangeOptions}
+          autoClickInterval={autoClickInterval}
+          changeIntervalTime={this.changeIntervalTime}
+          handleChangeStep={this.handleChangeStep}
+          step={step}
+          showOptions={showOptions}
+        />
       </section>
     );
   }
