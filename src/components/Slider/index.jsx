@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SliderController from './SliderController/SliderController';
+import PropTypes from 'prop-types';
 
 class Slider extends Component {
   constructor(props) {
@@ -62,5 +63,16 @@ class Slider extends Component {
     );
   }
 }
+
+Slider.propTypes = {
+  slides: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number,
+      src: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string,
+    })
+  ),
+};
 
 export default Slider;
