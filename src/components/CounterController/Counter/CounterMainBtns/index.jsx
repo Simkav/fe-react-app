@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 const CounterMainBtns = (props) => {
@@ -7,7 +6,7 @@ const CounterMainBtns = (props) => {
     Style,
     autoClickDuration,
     isIncriment,
-    siwtchMode,
+    switchMode,
     startAutoClick,
     incriment,
     stopAutoClick,
@@ -17,7 +16,7 @@ const CounterMainBtns = (props) => {
       <button onClick={incriment}>
         {isIncriment ? 'Increment' : 'Decrement'}
       </button>
-      <button onClick={siwtchMode}>Switch mode</button>
+      <button onClick={switchMode}>Switch mode</button>
       <div className={Style.autoClickContainer}>
         <button onClick={startAutoClick}>AutoClick </button>
         <div className={Style.autoClickDuration}>

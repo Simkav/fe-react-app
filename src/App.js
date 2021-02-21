@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Slider from './components/Slider';
+import CounterController from './components/CounterController';
+// import Slider from './components/Slider';
+/* 
 const DB = [
   {
     id: 1,
@@ -43,10 +45,11 @@ const DB = [
       'Hubble reveals a colorful landscape of iridescent gases, streamers of dust, and brilliant, newborn stars in the giant red nebula NGC 2014. The blue ring of glowing oxygen at left is the neighboring nebula NGC 2020, formed by a torrential gaseous outflow from a lone, massive, super-hot star at its center.',
   },
 ];
+*/
 function App(props) {
   return (
     <>
-      <Slider slides={DB} />
+      <CounterController />
     </>
   );
 }

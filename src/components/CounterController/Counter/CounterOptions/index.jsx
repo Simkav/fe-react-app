@@ -7,7 +7,7 @@ function CounterOptions(props) {
     showOptions,
     autoClickInterval,
     step,
-    changeIntervalTime,
+    setClickInterval,
     handleChangeStep,
     changeOptions,
   } = props;
@@ -17,7 +17,7 @@ function CounterOptions(props) {
       <div className={cx({ [Style.hidden]: showOptions })}>
         Interval time(ms):
         <input
-          onChange={changeIntervalTime}
+          onChange={setClickInterval}
           value={autoClickInterval}
         ></input>{' '}
         <div className={cx(Style.field, Style.step)}>
@@ -32,7 +32,7 @@ CounterOptions.propTypes = {
   showOptions: PropTypes.bool.isRequired,
   autoClickInterval: PropTypes.number,
   step: PropTypes.number.isRequired,
-  changeIntervalTime: PropTypes.func,
+  setClickInterval: PropTypes.func,
   handleChangeStep: PropTypes.func,
   changeOptions: PropTypes.func,
 };

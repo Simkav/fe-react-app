@@ -1,55 +1,41 @@
 import React, { Component } from 'react';
-import Style from './Counter.module.css';
+import styles from '../Counter.module.css';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import CounterOptions from './CounterOptions';
 import CounterMainBtns from './CounterMainBtns';
+
 class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0,
       isIncriment: true,
-      isValid: true,
-      step: 1,
-      autoClickInterval: 1000,
-      showOptions: true,
       autoClickDuration: 0,
     };
+    this.intervalId = null;
     this.autoClickDurationId = null;
     this.autoClickMaxDuration = 30;
-    this.intervalId = null;
   }
 
   siwtchMode = () => {
     this.setState({ isIncriment: !this.state.isIncriment });
   };
-  handleChangeStep = (e) => {
-    const value = this.checkValidNumber(e.target.value);
-    this.setState({
-      step: value,
-    });
-  };
-
-  changeIntervalTime = (e) => {
-    const value = this.checkValidNumber(e.target.value);
-    this.setState({
-      autoClickInterval: value,
-    });
-  };
   checkValidNumber = (number) => {
     const num = Number(number);
     if (isNaN(num)) {
-      this.setState({ isValid: false });
+      this.props.unValid();
     } else {
       return num;
     }
   };
-  handleChangeOptions = () => {
-    this.setState({
-      showOptions: !this.state.showOptions,
-    });
+  handleChangeStep = ({ target: { value } }) => {
+    this.props.setStep(this.checkValidNumber(value));
   };
+  handleClickInteval = ({ target: { value } }) => {
+    this.props.setClickInterval(this.checkValidNumber(value));
+  };
+
   stopAutoClick = () => {
     clearInterval(this.intervalId);
     this.intervalId = null;
@@ -60,64 +46,57 @@ class Counter extends Component {
     });
   };
   startAutoClick = () => {
-    const { autoClickInterval } = this.state;
-    let { autoClickDuration } = this.state;
+    const { autoClickInterval } = this.props;
     let { intervalId } = this;
     if (!intervalId) {
       this.intervalId = setInterval(this.incriment, autoClickInterval);
       this.autoClickDurationId = setInterval(() => {
-        this.setState({ autoClickDuration: ++autoClickDuration });
+        if (this.state.autoClickDuration >= this.autoClickMaxDuration - 1) {
+          this.stopAutoClick();
+          return;
+        }
+        this.setState({
+          autoClickDuration: this.state.autoClickDuration + 1,
+        });
       }, 1000);
     }
   };
   incriment = () => {
-    const { step, count, isIncriment } = this.state;
+    const { count, isIncriment } = this.state;
+    const { step } = this.props;
     this.setState({
       count: isIncriment ? count + step : count - step,
     });
   };
   componentDidMount() {
-    const { step } = this.props;
-    this.checkValidNumber(step);
-    this.setState({ step: step });
     this.startAutoClick();
-  }
-  componentDidUpdate() {
-    if (this.state.autoClickDuration >= this.autoClickMaxDuration) {
-      this.stopAutoClick();
-    }
   }
 
   render() {
+    const { count, isIncriment, autoClickDuration } = this.state;
     const {
-      count,
-      isValid,
       step,
-      autoClickInterval,
       showOptions,
-      autoClickDuration,
-      isIncriment,
-    } = this.state;
-    if (!isValid) {
-      return <>Something go wrong, reload app</>;
-    }
+      switchOptionVisible,
+      autoClickInterval,
+    } = this.props;
     return (
       <section>
-        <div className={cx(Style.field, Style.count)}>Counter: {count}</div>
+        <div className={cx(styles.field, styles.count)}>Counter: {count}</div>
         <CounterMainBtns
           autoClickDuration={autoClickDuration}
           incriment={this.incriment}
-          Style={Style}
+          Style={styles}
           switchMode={this.siwtchMode}
           startAutoClick={this.startAutoClick}
           stopAutoClick={this.stopAutoClick}
           isIncriment={isIncriment}
         />
         <CounterOptions
-          Style={Style}
-          changeOptions={this.handleChangeOptions}
+          Style={styles}
+          changeOptions={switchOptionVisible}
           autoClickInterval={autoClickInterval}
-          changeIntervalTime={this.changeIntervalTime}
+          setClickInterval={this.handleClickInteval}
           handleChangeStep={this.handleChangeStep}
           step={step}
           showOptions={showOptions}
