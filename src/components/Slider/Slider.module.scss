@@ -28,10 +28,15 @@
   .btnSlide {
     cursor: pointer;
     position: absolute;
+
     top: 45%;
     z-index: 1;
     font-size: 4rem;
+
     color: white;
+    border: 0;
+    background-color: unset;
+    outline: 0;
   }
   .leftSlide {
     left: 15px;
