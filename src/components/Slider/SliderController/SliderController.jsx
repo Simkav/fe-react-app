@@ -14,6 +14,18 @@ const SliderController = (props) => {
     switchSlideShow,
     isSlideShow,
   } = props;
+
+  const isNotFullScreen = (
+    <>
+      <SliderSlideShow
+        className={styles.slideShow}
+        switchSlideShow={switchSlideShow}
+        isSlideShow={isSlideShow}
+        nextSlide={nextSlide}
+      />
+      <SlideInfo slide={slide} />
+    </>
+  );
   return (
     <section className={styles.slider}>
       <SliderImgWrapper
@@ -23,18 +35,7 @@ const SliderController = (props) => {
         isFullScreen={isFullScreen}
         img={slide.src}
       />
-      {isFullScreen ? (
-        <></>
-      ) : (
-        <>
-          <SliderSlideShow
-            switchSlideShow={switchSlideShow}
-            isSlideShow={isSlideShow}
-            nextSlide={nextSlide}
-          />
-          <SlideInfo slide={slide} />
-        </>
-      )}
+      {isFullScreen ? <></> : isNotFullScreen}
     </section>
   );
 };
