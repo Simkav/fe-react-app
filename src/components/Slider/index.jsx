@@ -9,6 +9,7 @@ class Slider extends Component {
       isSlideShow: false,
       isFullScreen: false,
     };
+    this.intervalId = null;
   }
 
   setIndex = (index) => {
@@ -27,9 +28,16 @@ class Slider extends Component {
   };
 
   switchSlideShow = () => {
+    const { isSlideShow } = this.state;
     this.setState({
-      isSlideShow: !this.state.isSlideShow,
+      isSlideShow: !isSlideShow,
     });
+    if (!this.intervalId) {
+      this.intervalId = setInterval(this.nextSlide, 2500);
+    } else {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   };
 
   switchFullScreen = () => {
@@ -37,16 +45,6 @@ class Slider extends Component {
       isFullScreen: !this.state.isFullScreen,
     });
   };
-  componentDidUpdate() {
-    //TODO Fix timeout stacking refactor this
-    console.log('test');
-    const { isSlideShow } = this.state;
-    setTimeout(() => {
-      if (isSlideShow) {
-        this.nextSlide();
-      }
-    }, 2500);
-  }
 
   render() {
     const { slides: DB } = this.props;
