@@ -9,32 +9,38 @@ class SliderImgWrapper extends Component {
     }
   };
 
+  createButton = (direction) => {
+    const { isFullScreen, prevSlide, nextSlide } = this.props;
+    const fullScreen = cx({ [styles.fullScreen]: isFullScreen });
+    const isLeftBtn = direction === 0;
+    return (
+      <button
+        onClick={isLeftBtn ? prevSlide : nextSlide}
+        className={cx(
+          isLeftBtn ? styles.leftSlide : styles.rightSlide,
+          styles.btnSlide,
+          fullScreen
+        )}
+      >
+        {isLeftBtn ? '<' : '>'}
+      </button>
+    );
+  };
+
   render() {
-    const { img, isFullScreen, prevSlide, nextSlide } = this.props;
+    const { img, isFullScreen } = this.props;
     const fullScreen = cx({ [styles.fullScreen]: isFullScreen });
 
     return (
-      <div className={styles.imageContainer}>
-        <div className={styles.imageWrapper}>
-          <div
-            onClick={prevSlide}
-            className={cx(styles.leftSlide, styles.btnSlide, fullScreen)}
-          >
-            {'<'}
-          </div>
-          <img
-            className={cx(fullScreen)}
-            onClick={this.handeDoubleClick}
-            src={img}
-            alt="Some img"
-          />
-          <div
-            onClick={nextSlide}
-            className={cx(styles.rightSlide, styles.btnSlide, fullScreen)}
-          >
-            {'>'}
-          </div>
-        </div>
+      <div className={styles.imageWrapper}>
+        {this.createButton(0)}
+        <img
+          className={cx(fullScreen)}
+          onClick={this.handeDoubleClick}
+          src={img}
+          alt="Some img"
+        />
+        {this.createButton(1)}
       </div>
     );
   }
