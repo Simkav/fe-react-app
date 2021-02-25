@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getUsers } from '../../api';
 import Spinner from '../Spinner';
 
 class UserLoader extends Component {
@@ -14,10 +15,7 @@ class UserLoader extends Component {
   }
   fetchResults = () => {
     const { currentPage, results } = this.state;
-    fetch(
-      `https://randomuser.me/api/?results=${results}&page=${currentPage}&seed=FE2020-2`
-    )
-      .then(res => res.json())
+    getUsers({ page: currentPage, results: results })
       .then(data => this.setState({ users: data.results }))
       .catch(() => this.setState({ isError: true }))
       .finally(() => {
