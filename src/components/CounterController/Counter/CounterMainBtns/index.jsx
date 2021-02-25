@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CounterMainBtns = (props) => {
+const CounterMainBtns = props => {
   const {
     Style,
     autoClickDuration,

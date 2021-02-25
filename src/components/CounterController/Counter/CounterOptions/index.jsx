@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-function CounterOptions(props) {
+function CounterOptions (props) {
   const {
     Style,
     showOptions,

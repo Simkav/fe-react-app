@@ -3,13 +3,13 @@ import styles from '../Slider.module.scss';
 import cx from 'classnames';
 
 class SliderImgWrapper extends Component {
-  handeDoubleClick = (e) => {
+  handeDoubleClick = e => {
     if (e.detail === 2) {
       this.props.switchFullScreen();
     }
   };
 
-  createButton = (direction) => {
+  createButton = direction => {
     const { isFullScreen, prevSlide, nextSlide } = this.props;
     const fullScreen = cx({ [styles.fullScreen]: isFullScreen });
     const isLeftBtn = direction === 0;
@@ -27,7 +27,7 @@ class SliderImgWrapper extends Component {
     );
   };
 
-  render() {
+  render () {
     const { img, isFullScreen } = this.props;
     const fullScreen = cx({ [styles.fullScreen]: isFullScreen });
 
@@ -38,7 +38,7 @@ class SliderImgWrapper extends Component {
           className={cx(fullScreen)}
           onClick={this.handeDoubleClick}
           src={img}
-          alt="Some img"
+          alt='Some img'
         />
         {this.createButton(1)}
       </div>

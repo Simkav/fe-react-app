@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class StopWatch extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
@@ -26,7 +26,7 @@ class StopWatch extends Component {
     }
   };
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     console.log(this.timeoutId);
 
     if (this.timeoutId) {
@@ -45,15 +45,15 @@ class StopWatch extends Component {
     this.timeoutId = null;
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.start();
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.stop();
   }
 
-  render() {
+  render () {
     const { time } = this.state;
     return (
       <article>

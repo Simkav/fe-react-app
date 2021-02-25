@@ -1,4 +1,4 @@
-const UserCard = (props) => {
+const UserCard = props => {
   const {
     user: { id, firstName, lastName, isSelected },
     userSelector,

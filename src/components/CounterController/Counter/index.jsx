@@ -6,7 +6,7 @@ import CounterOptions from './CounterOptions';
 import CounterMainBtns from './CounterMainBtns';
 
 class Counter extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       count: 0,
@@ -21,7 +21,7 @@ class Counter extends Component {
   siwtchMode = () => {
     this.setState({ isIncriment: !this.state.isIncriment });
   };
-  checkValidNumber = (number) => {
+  checkValidNumber = number => {
     const num = Number(number);
     if (isNaN(num)) {
       this.props.unValid();
@@ -68,11 +68,11 @@ class Counter extends Component {
       count: isIncriment ? count + step : count - step,
     });
   };
-  componentDidMount() {
+  componentDidMount () {
     this.startAutoClick();
   }
 
-  render() {
+  render () {
     const { count, isIncriment, autoClickDuration } = this.state;
     const {
       step,

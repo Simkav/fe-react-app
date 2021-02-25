@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../Slider.module.scss';
 
-const SliderInfo = (props) => {
+const SliderInfo = props => {
   const { slide } = props;
   return (
     <div className={styles.slideInfo}>

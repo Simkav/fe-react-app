@@ -4,7 +4,7 @@ import SlideInfo from './SliderInfo';
 import styles from '../Slider.module.scss';
 import SliderSlideShow from './SliderSlideShow';
 
-const SliderController = (props) => {
+const SliderController = props => {
   const {
     slide,
     isFullScreen,

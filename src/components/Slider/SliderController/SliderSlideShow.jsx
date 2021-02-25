@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from '../Slider.module.scss';
 
 class SliderSlideShow extends Component {
-  render() {
+  render () {
     const { switchSlideShow, isSlideShow } = this.props;
     return (
       <div className={styles.slideShowContainer}>

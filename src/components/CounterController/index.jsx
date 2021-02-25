@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Counter from './Counter';
 
 class CounterController extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       autoClickInterval: 1000,
@@ -11,10 +11,10 @@ class CounterController extends Component {
       showOptions: false,
     };
   }
-  setStep = (n) => {
+  setStep = n => {
     this.setState({ step: n });
   };
-  setClickInterval = (n) => {
+  setClickInterval = n => {
     this.setState({ autoClickInterval: n });
   };
   switchOptionVisible = () => {
@@ -24,7 +24,7 @@ class CounterController extends Component {
     this.setState({ isValid: false });
   };
 
-  render() {
+  render () {
     const { isValid, step, showOptions, autoClickInterval } = this.state;
     if (!isValid) {
       return <>Something go wrong, reload app</>;

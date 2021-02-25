@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 class Aloha extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       isGreeting: true,
@@ -15,7 +15,7 @@ class Aloha extends Component {
     const { deleteUser, id } = this.props;
     deleteUser(id);
   };
-  render() {
+  render () {
     const { name, photo, removeChild, id } = this.props;
     const { isGreeting } = this.state;
     if (!isGreeting) {

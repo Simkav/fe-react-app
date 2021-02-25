@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SortedAlohaList from '../SortedAlohaList';
 class AlohaDashboard extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       isDirectSort: true,
@@ -45,17 +45,17 @@ class AlohaDashboard extends Component {
     };
   }
 
-  setUsers = (users) => {
+  setUsers = users => {
     this.setState({ users });
   };
-  deleteUser = (userId) => {
+  deleteUser = userId => {
     const { users } = this.state;
     this.setState({
-      users: users.filter((user) => user.id !== userId),
+      users: users.filter(user => user.id !== userId),
     });
   };
 
-  render() {
+  render () {
     const { users } = this.state;
     return (
       <>

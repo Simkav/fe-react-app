@@ -3,7 +3,7 @@ import SliderController from './SliderController/SliderController';
 import PropTypes from 'prop-types';
 
 class Slider extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       currentIndex: 0,
@@ -13,7 +13,7 @@ class Slider extends Component {
     this.intervalId = null;
   }
 
-  setIndex = (index) => {
+  setIndex = index => {
     this.setState({ currentIndex: index });
   };
 
@@ -47,7 +47,7 @@ class Slider extends Component {
     });
   };
 
-  render() {
+  render () {
     const { slides: DB } = this.props;
     const { currentIndex, isFullScreen, isSlideShow } = this.state;
     return (

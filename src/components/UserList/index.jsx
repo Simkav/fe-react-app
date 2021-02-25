@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import UserCard from './UserCard';
 
 class UserList extends Component {
-  userSelector = (id) => {
+  userSelector = id => {
     const { users, setUsers } = this.props;
     const newUsers = [...users];
 
     setUsers(
-      newUsers.map((user) => ({
+      newUsers.map(user => ({
         ...user,
         isSelected: user.id === id ? !user.isSelected : user.isSelected,
       }))
     );
   };
 
-  mapUser = (user) => (
+  mapUser = user => (
     <UserCard key={user.id} user={user} userSelector={this.userSelector} />
   );
 
-  render() {
+  render () {
     const { users } = this.props;
     return (
       <section>
