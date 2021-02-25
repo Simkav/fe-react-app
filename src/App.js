@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CounterController from './components/CounterController';
 import Slider from './components/Slider';
+import UsersLoader from './components/UsersLoader';
 
 const DB = [
   {
@@ -49,7 +50,7 @@ const DB = [
 function App (props) {
   return (
     <>
-      <Slider slides={DB} />
+      <UsersLoader />
     </>
   );
 }
